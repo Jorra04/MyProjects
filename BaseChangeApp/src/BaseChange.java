@@ -1,107 +1,169 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 public class BaseChange {
 
 	public static void main(String[] args) {
-		
-		Scanner in  = new Scanner(System.in);
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
 		boolean tf = true;
-		String Hex1 = "h";
-		String bin = "b";
-		String ans1 = "";
-		String result;
+		String binary = "";
+		String hexadecimal = "";
+		String base1 = "";
+		String base2 = "";
 		while(tf) {
-			System.out.println("What is the base we are starting with today?");
-			String ans = in.nextLine();
-			if(ans.equals(Hex1) || ans.equals(Hex1.toUpperCase())) {
-				result = transfer1(ans);
-				 
-				ans1 = in.nextLine();
+			System.out.println("What is the base change conversion you wish to start with?");
+			System.out.println("1. Decimal");
+			System.out.println("2. Binary");
+			System.out.println("3. Hexadecimal");
+			int ans1 = input.nextInt();
+			if(ans1 ==1) {
+				base1 = "Decimal";
 			}
-			else if(ans.equals(bin) || ans.equals(bin.toUpperCase())) {
-				result = transfer2(ans);
-				ans1 = in.nextLine();
+			if(ans1 ==2) {
+				base1 = "Binary";
+			}
+			if(ans1 ==3) {
+				base1 = "Hexadecimal";
+			}
+			System.out.println("Okay, what woukd you like to convert to from, " + base1 + " ?");
+			System.out.println("1. Decimal");
+			System.out.println("2. Binary");
+			System.out.println("3. Hexadecimal");
+			int ans2 = input.nextInt();
+			if(ans2 ==1) {
+				base2 = "Decimal";
+			}
+			if(ans2 ==2) {
+				base2 = "Binary";
+			}
+			if(ans2 ==3) {
+				base2 = "Hexadecimal";
+			}
+
+			if(base1.contentEquals(base2)) {
+				System.out.println("no conversion necessary");
+				break;
 			}
 			else {
-				System.out.println("Invalid input please try again");
+				System.out.println("Okay, converting from " + base1+ " to "+ base2+".");
+			}
+
+			if(base1.contentEquals("Decimal")&&base2.contentEquals("Binary")) {
+				System.out.println("What is the decimal you wish to change to binary?");
+				double decimal = input.nextDouble();
+				input.nextLine();
+				while(decimal >0) {
+					if((decimal%2) == 0) {
+						binary+= "0";
+						decimal -= Math.ceil(decimal/2);
+						
+					}
+					else {
+						binary+= "1";
+						decimal -= Math.ceil(decimal/2);
+
+					}
+					
+				}
+				System.out.println(binary);
+				}
+			else if(base1.contentEquals("Decimal")&&base2.contentEquals("Hexadecimal")) {
+				System.out.println("What is the decimal you wish to change to Hexadecimal?");
+				int rem ;
+				int decimal = input.nextInt();
+				input.nextLine();
+				for(int i = 0; i <= (digitCounter(decimal)+1);i++) {
+					rem = decimal%16;
+					hexadecimal = toString(rem) + hexadecimal;
+					decimal = decimal/16;
+				}
+				System.out.println(hexadecimal);
+			}
+			else if(base1.contentEquals("Binary")&&base2.contentEquals("Decimal")) {
 				
 			}
+			else if(base1.contentEquals("Binary")&&base2.contentEquals("Hexadecimal")) {
+
+			}
+			else if(base1.contentEquals("Hexadecimal")&&base2.contentEquals("Binary")) {
+
+			}
+			else if(base1.contentEquals("Hexadecimal")&&base2.contentEquals("Decimal")) {
+
+			}
+			else {
+				System.out.println("no");
+			}
+
+
+
+
+
+		}
+	}
+
+	public static String toString(int num) {
+		String res = "";
+		if(num == 0) {
+			res = "0";
+		}
+		if(num == 1) {
+			res = "1";
+		}
+		if(num == 2) {
+			res = "2";
+		}
+		if(num == 3) {
+			res = "3";
+		}
+		if(num == 4) {
+			res = "4";
+		}
+		if(num == 5) {
+			res = "5";
+		}
+		if(num == 6) {
+			res = "6";
+		}
+		if(num == 7) {
+			res = "7";
+		}
+		if(num == 8) {
+			res = "8";
+		}
+		if(num == 9) {
+			res = "9";
+		}
+		if(num == 10) {
+			res = "A";
+		}
+		if(num == 11) {
+			res = "B";
+		}
+		if(num == 12) {
+			res = "C";
+		}
+		if(num == 13) {
+			res = "D";
+		}
+		if(num == 14) {
+			res = "E";
+		}
+		if(num == 15) {
+			res = "F";
 		}
 
+		return res;
 	}
-	
-	public static String transfer1(String hex) {
-		String result = "";
-		for(int i = 0; i < hex.length(); i++) {
-			result += 
+	public static int digitCounter(double number) {
+		int count = 0 , num = (int)number;
+		
+		while(num!=0) {
+			num/=10;
+			count++;
 		}
-	}
-	public static String transfer2(String bin) {
-		for(int i = 0; i < bin.length(); i++) {
-			
-		}
-	}
-	public String toHex(int bin){
-		if(bin == 0) {
-			return "0";
-		}
-		if(bin == 1) {
-			return "1";
-		}
-		if(bin == 2) {
-			return "2";
-		}
-		if(bin == 3) {
-			return "3";
-		}
-		if(bin == 4) {
-			return "4";
-		}
-		if(bin == 5) {
-			return "5";
-		}
-		if(bin == 6) {
-			return "6";
-		}
-		if(bin == 7) {
-			return "7";
-		}
-		if(bin == 8) {
-			return "8";
-		}
-		if(bin == 8) {
-			return "8";
-		}
-		if(bin == 9) {
-			return "9";
-		}
-		if(bin == 10) {
-			return "A";
-		}
-		if(bin == 11) {
-			return "B";
-		}
-		if(bin == 12) {
-			return "C";
-		}
-		if(bin == 13) {
-			return "D";
-		}
-		if(bin == 14) {
-			return "E";
-		}
-		if(bin == 15) {
-			return "F";
-		}
-		else {
-			return "NaN";
-		}
-	}
-	public static int toDecFromHex(String hex) {
-		int res = 0;
-		for(int i = 0; i < hex.length(); i ++) {
-			res += hex.charAt(i)
-		}
+		return count;
 	}
 
 }
