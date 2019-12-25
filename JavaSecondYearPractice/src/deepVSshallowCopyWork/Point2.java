@@ -5,7 +5,7 @@ public class Point2 {
 	
 	int x;
 	int y;
-	List<Integer> myList = new ArrayList<>();
+	List<Point2> myList = new ArrayList<>();
 	
 	Point2(int x, int y){ //argument constructor
 		this.x = x;
@@ -20,6 +20,11 @@ public class Point2 {
 	
 	Point2(Point2 other){ //copy constructor... also uses constructor chaining.
 		this(other.x, other.y);
+	}
+	public void setPoint(int x, int y) {
+		this.x = x;
+		this.y = y;
+		
 	}
 	
 	
