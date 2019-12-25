@@ -1,16 +1,19 @@
 package ListPractice;
+
 import java.util.*;
 
 public class Grades {
 	public static void main(String[] args) {
 		Map<String, List<String>> transcript = new HashMap<>();
-		List<String> grades = new ArrayList<>();
+		
 		Scanner input = new Scanner(System.in);
 		boolean tf = true;
 		
 		
 		
+		
 		while(tf) {
+			List<String> grades = new ArrayList<>();
 			System.out.println("Please enter the student's name.");
 			String name = input.nextLine();
 			System.out.println("How many courses is the student currently taking?");
@@ -24,7 +27,7 @@ public class Grades {
 			}
 			transcript.put(name, grades);
 
-			System.out.println(transcript.toString() + "\n");
+			
 			
 			boolean tf2 = true;
 			while(tf2) {
@@ -35,6 +38,7 @@ public class Grades {
 					tf2 = false;
 				}
 				else if(ans1.equals("n") || ans1.equals("N")) {
+					System.out.println(transcript.toString());
 					
 					System.out.println("Have a nice day");
 					tf = false;
@@ -50,7 +54,7 @@ public class Grades {
 		
 		
 		
-		
+	
 		input.close();
 	}
 	

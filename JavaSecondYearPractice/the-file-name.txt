@@ -1,0 +1,1 @@
+{jorra=[A, B, A, B], inder=[A, B, A]}
