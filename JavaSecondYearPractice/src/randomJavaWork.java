@@ -36,6 +36,9 @@ public class randomJavaWork {
 //		System.out.println(d2);
 //		System.out.println(d3);
 //		System.out.println(d4);
+		String h = "this is a practice";
+		h = h.replaceAll("\\s","");
+		System.out.println(h);
 		
 
 	}
