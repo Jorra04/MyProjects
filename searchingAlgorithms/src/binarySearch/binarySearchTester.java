@@ -56,10 +56,10 @@ class binarySearchTester {
 		int x = rand.nextInt(10);
 		boolean exp = myList.contains(x);
 		boolean got = binarySearch.binarySearchAlgorithm2(x, myList);
-		System.out.println(myList);
-		System.out.println(x);
-		System.out.println(exp);
-		System.out.println(got);
+//		System.out.println(myList);
+//		System.out.println(x);
+//		System.out.println(exp);
+//		System.out.println(got);
 		assertEquals(exp,got);
 		
 	}
@@ -75,10 +75,10 @@ class binarySearchTester {
 		int x = rand.nextInt(10);
 		boolean exp = myList.contains(x);
 		boolean got = binarySearch.binarySearchAlgorithm2(x, myList);
-		System.out.println(myList);
-		System.out.println(x);
-		System.out.println(exp);
-		System.out.println(got);
+//		System.out.println(myList);
+//		System.out.println(x);
+//		System.out.println(exp);
+//		System.out.println(got);
 		assertEquals(exp,got);
 		
 	}
