@@ -67,5 +67,6 @@ public class NumberGame {
 				break;
 				
 			}
+		userInput.close();
 		}
 	}

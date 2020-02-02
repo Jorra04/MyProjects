@@ -37,6 +37,7 @@ public class PushIndicies2 {
 			}
 		}
 		System.out.print("}");
+		input.close();
 	}
 
 }

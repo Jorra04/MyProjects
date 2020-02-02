@@ -101,6 +101,7 @@ public class BaseChange {
 
 
 		}
+		input.close();
 	}
 
 	public static String toString(int num) {

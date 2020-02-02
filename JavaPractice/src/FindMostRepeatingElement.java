@@ -7,6 +7,7 @@ public class FindMostRepeatingElement {
 		System.out.println("Enter the size of the array you would like to create.");
 		int size = input.nextInt();
 		int[] initArr = new int[size];
+		input.close();
 		
 
 	}

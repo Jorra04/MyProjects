@@ -153,6 +153,7 @@ public class practice1 {
 			
 			
 		}
+		input.close();
 		
 	}
 
