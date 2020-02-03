@@ -17,13 +17,15 @@ public class practice2 {
 		int[] tester12 = { 1,2,3,4 };
 		int[] tester13 = { 1,2,3,4 , 1 };
 		int[] tester14 = { 10, 6, 2, 0 };
-		int[] tester15 = {1,1,1,1 };
+		int[] tester15 = {3,1,2,4};
 		String test1 = "";
 		String test2 = "loveleetcode";
 		String num1 = "5100";
 		String num2 = "5100";
 		String brack = "()))((";
-		int a = 1200;
+		int a = 15;
+		String str1 = "9";
+		String str2 = "99";
 		
 //		System.out.println(tester11.replaceAll("\\.", "[.]"));
 
@@ -44,7 +46,12 @@ public class practice2 {
 //		System.out.println(firstUniqChar(test2));
 //		System.out.println(addStrings(num1,num2));
 //		System.out.println(minAddToMakeValid(brack));
-		System.out.println(reverse(a));
+//		System.out.println(reverse(a));
+//		System.out.println(baseNeg2(a));
+//		System.out.println(sortArrayByParity(tester15));
+//		System.out.println(fizzBuzz(a));
+//		System.out.println(getNoZeroIntegers(a));
+		System.out.println(addStrings(str1,str2));
 	}
 
 	public static boolean containsDuplicate(int[] nums) {
@@ -140,12 +147,12 @@ public class practice2 {
 	        
 	        return finalList.indexOf(finalList.get(0));
 	    }
-	 public static String addStrings(String num1, String num2) {
-	        int number1 = Integer.parseInt(num1);
-	        int number2 = Integer.parseInt(num2);
-	        int result = number1+number2;
-	        return String.valueOf(result);
-	    }
+//	 public static String addStrings(String num1, String num2) {
+//	        int number1 = Integer.parseInt(num1);
+//	        int number2 = Integer.parseInt(num2);
+//	        int result = number1+number2;
+//	        return String.valueOf(result);
+//	    }
 	 public static int minAddToMakeValid(String S) {
 	        int leftBrack = 0;
 	        int rightBrack = 0;
@@ -196,6 +203,98 @@ public class practice2 {
 	            returner+=myList.get(i);
 	        }
 	        return returner;
+	    }
+	    public static String baseNeg2(int N) {
+	        String prac = Integer.toString(N);
+	        int sum = 0;
+	        List<Character> myList = new ArrayList<>(prac.length());
+	        for(int i = 0; i < prac.length(); i ++){
+	            myList.add(prac.charAt(i));
+	        }
+	        for(int i = 0; i < myList.size(); i++){
+	            sum+= Math.pow(myList.get(i),myList.size() - i - 1);
+	        }
+	        String returner = Integer.toString(sum);
+	        
+	        return returner;
+	    }
+	    public static int[] sortArrayByParity(int[] A) {
+	        int count = 0;
+	        List<Integer> evens = new ArrayList<>();
+	        List<Integer> odds = new ArrayList<>();
+	        for(int i = 0; i < A.length; i++){
+	            if(A[i] %2 == 0){
+	                evens.add(A[i]);
+	            }
+	            else{
+	                odds.add(A[i]);
+	            }
+	        }
+	        int [] myArr = new int[evens.size() + odds.size()];
+	        for(int i = 0; i < (odds.size() + evens.size() ); i ++){
+	            if(i < evens.size()){
+	                myArr[i] = evens.get(i);
+	            }
+	            else{
+	                myArr[i] = odds.get(count);
+	                count++;
+	            }
+	        }
+	        return myArr;
+	        
+	    }
+	    public static List<String> fizzBuzz(int n) {
+	        List<String> myList = new ArrayList<>();
+	        int count = 1;
+	        while(count <= n){
+	            if(count %3 == 0 && count %5 == 0){
+	                myList.add("FizzBuzz");
+	            }
+	            else if(count %3 == 0 ){
+	                myList.add("Fizz");
+	            }
+	            else if(count %5 == 0){
+	                myList.add("Buzz");
+	            }
+	            else{
+	                myList.add(""+count);    
+	            }
+	            count++;
+	        }
+	        
+	        return myList;
+	    }
+	    public static int[] getNoZeroIntegers(int n) {
+	        int[] myArr = new int[2];
+//	        outerloop:
+	        for(int i = 1; i < n; i ++){
+	            for(int j = 1; j < n; j ++){
+	                if(i+j == n){
+	                    myArr[0] = i;
+	                    myArr[1] = j;
+//	                    break outerloop;
+	                }
+	            }
+	        }
+	        return myArr;
+	    }
+	    public static String addStrings(String num1, String num2) {
+	        char[] arr1 = num1.toCharArray();
+	        char[] arr2 = num2.toCharArray();
+	        int sum1 = 0;
+	        int sum2 = 0;
+	        int totsum = 0;
+	        for(int i =0; i <arr1.length; i++){
+	        	double adder = Character.getNumericValue(arr1[i]) * Math.pow(10, (arr1.length-i-1));
+	            sum1+=adder;
+	        }
+	        for(int i =0; i <arr2.length; i++){
+	        	double adder =Character.getNumericValue(arr2[i]) *Math.pow(10, (arr2.length-i-1));
+	            sum2+= adder;
+	        }
+	        totsum =  sum1+sum2;
+	        return Integer.toString(totsum);
+	        
 	    }
 
 }
