@@ -44,6 +44,8 @@ public class practice2 {
 		int p44 = 160000;
 		int p45 = 20736;
 		String word = "jorra     needs  to work on coding  ";
+		String t1 = "Test1ng-Leet=code-Q!";
+		String t2 = "Qedo1ct-eeLg=ntse-T!";
 
 //		System.out.println(tester11.replaceAll("\\.", "[.]"));
 
@@ -83,8 +85,10 @@ public class practice2 {
 //		System.out.println(twoSum(myarr,5));
 //		System.out.println(maximumProduct(myarr));
 //		System.out.println(isPowerOfFour(p42));
-		System.out.println(reverseWords(word));
-
+//		System.out.println(reverseWords(word));
+//		System.out.println(hasAlternatingBits(5));
+//		System.out.println(reverseOnlyLetters("7_28]"));
+//		System.out.println(t2);
 	}
 
 	public static boolean containsDuplicate(int[] nums) {
@@ -526,6 +530,60 @@ public class practice2 {
 	        
 	        return returner ;
 	    }
+	 
+	 public static boolean hasAlternatingBits(int n) {
+	        String bin = Integer.toBinaryString(n);
+	        boolean tf = false;
+	        if(bin.length() == 1){
+	            return true;
+	        }
+	        outerloop:
+	        for(int i =1 ;i < bin.length(); i ++){
+	        	System.out.println(bin.charAt(i));
+	        	System.out.println(bin.charAt(i-1));
+	            if((Character.getNumericValue(bin.charAt(i)) == 1 && Character.getNumericValue(bin.charAt(i-1)) == 0) 
+	            		||(Character.getNumericValue(bin.charAt(i)) == 0 && Character.getNumericValue(bin.charAt(i-1)) == 1) ){
+	                tf = true;
+	            }
+	            else{
+	                tf = false;
+	                break outerloop;
+	            }
+	        }
+	        return tf;
+	    }
+	 
+	 public static String reverseOnlyLetters(String S) {
+	        char[] arr = S.toCharArray();
+	        int i = 0;
+	        int j = arr.length-1;
+	        while(i < j){
+	            if( Character.isAlphabetic(arr[i]) && Character.isAlphabetic(arr[j]) ){
+	            	char temp = arr[i];
+	            	arr[i] = arr[j];
+	            	arr[j] = temp;
+	            	j--;
+	            	i++;
+	            }
+	            else if(Character.isAlphabetic(arr[i])) {
+	            	j--;
+	            }
+	            else if(Character.isAlphabetic(arr[j])) {
+	            	i++;
+	            }
+	            else {
+	            	j--;
+		            i++;
+	            }
+	            
+	        }
+	        String str = "";
+	        for(int k = 0; k < arr.length; k ++) {
+	        	str+=arr[k];
+	        }
+	        return str;
+	    }
+
 	
 
 }
