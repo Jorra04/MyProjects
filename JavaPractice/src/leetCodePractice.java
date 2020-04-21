@@ -6,7 +6,7 @@ public class leetCodePractice {
 
 	public static void main(String[] args) {
 //		System.out.println(firstUniqChar("loveleetcode"));
-		int[] nums = { 2,2,2,2,2,2};
+		int[] nums = {1,2,3,1,2,3};
 		 
 		int[][] matrix = {
 		                  {1,2,3},
@@ -15,7 +15,7 @@ public class leetCodePractice {
 		};
 //		String [] words = {"leetcode", "et", "code"};
 		String[] words = {"leetcoder", "leetcode", "od", "hamlet", "am"};
-		
+		int [] digits = {9,8,7,6,5,4,3,2,1,0};
 //		arrayPrinter(smallerNumbersThanCurrent(nums));
 //		System.out.println(frequencySort("hello"));
 //		arrayPrinter(sortedSquares(nums));
@@ -31,10 +31,62 @@ public class leetCodePractice {
 //		System.out.println(isPerfectSquare(4));
 //		System.out.println(reverseString("hello"));
 //		System.out.println(kthSmallest(matrix, 9));
-		System.out.println(stringMatching(words));
+//		System.out.println(stringMatching(words));
+//		arrayPrinter(plusOne(digits));
+//		System.out.println(containsNearbyDuplicate(nums, 2));
+		int[] arr = {-3,0,1,-3,1,1,1,-3,10,0};
+		System.out.println(uniqueOccurrences(arr));
 	}
+	public static boolean uniqueOccurrences(int[] arr) {
+	       HashMap <Integer, Integer> myMap = new HashMap<>();
+	        for(int i = 0 ;i < arr.length; i ++ ){
+	            int val = arr[i];
+	            if(myMap.containsKey(val)) myMap.put(val ,myMap.get(val) +1);
+	            
+	            else myMap.put(val, 1);
+	        }
+	        for(Map.Entry<Integer, Integer> entry : myMap.entrySet()){
+	        	System.out.println(myMap);
+	        	System.out.println(entry.getValue());
+	        	System.out.println(entry.getKey());
+	        	System.out.println(myMap.get(entry.getKey()));
+	        	System.out.println(myMap.get(entry.getKey()).equals(entry.getKey()));
+	            if(myMap.values().contains(entry.getValue()) && !myMap.get(entry.getKey()).equals(entry.getKey())){
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+	 public static boolean containsNearbyDuplicate(int[] nums, int k) {
+		 for(int i = 0; i < nums.length; i ++ ){
+	            for(int j = 0; j < i; j ++ ){
+	                if(nums[i] == nums[j] && Math.abs(i-j) <= k) return true;
+	            }
+	        }
+	        return false;
+	    }
 	
-	
+	public static int[] plusOne(int[] digits) {
+		int val = 0;
+        for(int i = 0 ; i < digits.length; i ++ ){
+            val+= digits[i] * Math.pow(10, digits.length -1 - i);
+        }
+        val += 1;
+        
+        int temp = val;
+        int count = 0;
+        while(temp > 0 ){
+            temp/=10;
+            count++;
+        }
+        int[] newArr = new int[count];
+        for(int i = 0; i < count; i ++ ){
+            newArr[count-1-i] = val%10;
+            val/=10;
+        }
+        
+        return newArr;
+    }
 	public static List<String> stringMatching(String[] words) {
         List<String> returner = new ArrayList<>();
         for( int i = 0; i < words.length; i ++ ){
@@ -293,7 +345,7 @@ public class leetCodePractice {
 			myList.add(i);
 		}
 		Collections.sort(myList);
-
+		
 		return "";
 	}
 
