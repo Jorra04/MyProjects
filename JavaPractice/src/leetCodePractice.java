@@ -66,8 +66,36 @@ public class leetCodePractice {
 //		System.out.println(canPlaceFlowers(flowerbed, 2));
 //		System.out.println(checkPossibility(nums));
 //		System.out.println(findPeakElement(nums));
-		System.out.println(trailingZeroes(13));
+//		System.out.println(trailingZeroes(13));
+		int[] arr = {1,2,3,4,5,6,7};
+//		arrayPrinter(productArray(arr));
+//		System.out.println(2%5);
+		arrayPrinter(rotateArr(arr, 2));
 	}
+	
+	public static int[] rotateArr(int[] arr, int d ) {
+		int[] returner = new int[arr.length];
+		for(int i =0; i < arr.length; i ++) {
+			returner[(i +d) %arr.length] = arr[i];
+		}
+		return returner;
+	}
+	
+	
+	public static int[] productArray(int[] arr ){
+        int[] returner = new int[arr.length];
+        int counter = 0;
+        for(int i =0; i < arr.length; i ++ ){
+            int runSum = 1;
+            for(int j = 0; j < arr.length; j ++ ){
+                if(i != j ) runSum *= arr[j];
+            }
+            System.out.println(runSum);
+            returner[counter++] = runSum; 
+        }
+
+        return returner;
+    }
 	
 	 public static int trailingZeroes(int n) {
 		 long val =1;
