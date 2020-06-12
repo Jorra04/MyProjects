@@ -106,25 +106,405 @@ public class HelloWorldTester {
 //		System.out.println( isIsomorphic("aba", "baa"));
 //		System.out.println(getNumSum(38));
 //		System.out.println(longestCommonSubsequence("ace", "abcde"));
-		int[] distance = {1,2,3,4};
-		System.out.println(distanceBetweenBusStops(distance, 0, 3));
+//		int[] distance = {1,2,3,4};
+//		System.out.println(distanceBetweenBusStops(distance, 0, 3));
+
+//		List<Integer> l = new ArrayList<>();
+//		l.add(10);
+//		l.add(-20);
+//		l.add(61);
+//		l.add(-15);
+//		
+//		System.out.println(getBattery(l));
+
+//		System.out.println(isAnagram("rawr", "warr"));
+
+//		try {
+//			Float f1 = new Float("3.0");
+//			int x = f1.intValue();
+//			byte b = f1.byteValue();
+//			double d = f1.doubleValue();
+//			System.out.println(x + b + d);
+//		}
+//		catch(NumberFormatException e) {
+//			System.out.println("Bad number");
+//		}
+
+//		System.out.println(addDigits(10));
+//		System.out.println(rotatedDigits(2));
+//		int[] nums = {1,2,3,4,4,6,7,8};
+//		System.out.println(findErrorNums(nums));
+//		int [] arr = {1,3,5,7,9};
+//		miniMaxSum(arr);
+//		System.out.println(timeConversion("12:05:39AM"));
+//		System.out.println(isValid("aabbccddeefghi"));
+//		int [] scores = {3 ,4, 21, 36, 10, 28, 35, 5, 24, 42};
+//		System.out.println(breakingRecords(scores));
+//		int[] arr =  {4};
+//		List<Integer> s = new ArrayList();
+//		for(int i: arr) {
+//			s.add(i);
+//		}
+//		System.out.println(birthday(s, 4, 1));
+
+//		System.out.println(dayOfProgrammer(1836));
+//		int[]nums = {0,4,0,3,2};
+//		System.out.println(findMaxAverage2(nums, 1));
+//		int[] nums = { 2, 3, -2, 4, 0, 5, 5, 0, 0 };
+//		System.out.println(maxProduct(nums));
+//		int[] A = {4,5,0,-2,-3,1};
+//		System.out.println(subarraysDivByK(A, 5));
+//		int[] A = {-7,-3,2,3,11};
+//		System.out.println(sortedSquares(A));
+//		arrayPrinter(sortedSquares(A));
+//		int[]nums = {4,3,2,7,8,2,3,1};
+//		System.out.println(findDuplicates(nums));
+//		int [][] matrix = {{1}};
+//		System.out.println(searchMatrix(matrix, 1));
+//		int [] A = {1,1};
+//		System.out.println(numSubarraysWithSum(A, 1));
+		int [] nums = {3,6,5,1,8};
+		System.out.println(maxSumDivThree(nums));
+		
 	}
 	
+	public static int maxSumDivThree(int[] nums) {
+        int sum = 0;
+        int max_sum = 0;
+        for(int i = 0; i < nums.length; i ++){
+            for(int j = i; j < nums.length;j++){
+                sum += nums[j];
+                if(sum %3  == 0) {
+                    max_sum = Math.max(sum,max_sum);
+                }
+                sum = 0;
+            }
+        }
+        return max_sum;
+    }
+	
+	public static int numSubarraysWithSum(int[] A, int S) {
+        int count = 0;
+        int sum = 0;
+        for(int i = 0 ;i < A.length; i ++){
+            sum = 0;
+            for(int j = i; j < A.length; j ++){
+                sum+=A[j];
+                if(sum == S) count ++;
+            }
+        }
+        
+        return count;
+    }
+	
+	public static boolean searchMatrix(int[][] matrix, int target) {
+        for(int[] inner : matrix){
+            if(Arrays.binarySearch(inner, target) >= 0) return true;
+        }
+        
+        return false;
+    }
+	
+	
+	public static List<Integer> findDuplicates(int[] nums) {
+        List<Integer> res = new ArrayList();
+        for(int i = 0; i < nums.length; i ++){
+            if(nums[Math.abs(nums[i]) -1] < 0) res.add(Math.abs(nums[i]));
+            
+            else nums[Math.abs(nums[i]) -1] *= -1;
+        }
+        return res;
+    }
+	
+	public static int[] sortedSquares(int[] A) {
+        int[] res = new int[A.length];
+        int i = 0;
+        int j = A.length -1;
+        int pointer = A.length -1;
+        while(i <= j) {
+        	if(A[i] * A[i] >= A[j] * A[j]) {
+        		res[pointer--] = A[i] * A[i];
+        		i++;
+        	}
+        	else if(A[i] * A[i] < A[j] * A[j]) {
+        		res[pointer--] = A[j] * A[j];
+        		j--;
+        	}
+        }
+        return res;
+    }
+
+	public static int subarraysDivByK(int[] A, int K) {
+		int num_divisible = 0;
+		
+		int curr_sum = A[0];
+		for(int i = 1; i < A.length; i ++) {
+			curr_sum = Math.max(A[i], curr_sum + A[i]);
+			if(curr_sum % K == 0) num_divisible ++;
+		}
+		
+		
+		return num_divisible;
+	}
+
+	public static int maxProduct(int[] nums) {
+		if (nums.length == 1)
+			return nums[0];
+		int max_prod = nums[0];
+		int curr_prod = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			curr_prod = Math.max(curr_prod, curr_prod * nums[i]);
+			max_prod = Math.max(max_prod, curr_prod);
+		}
+		return max_prod;
+	}
+
+	public static double findMaxAverage2(int[] nums, int k) {
+		double sum = 0;
+		for (int i = 0; i < k; i++)
+			sum += nums[i];
+		double res = sum;
+		for (int i = k; i < nums.length; i++) {
+			sum += nums[i] - nums[i - k];
+			res = Math.max(res, sum);
+		}
+		return res / k;
+	}
+
+	public static double findMaxAverage(int[] nums, int k) {
+		double sum = 0;
+		double max_avg = Double.NEGATIVE_INFINITY;
+		int i = 0;
+		for (int j = k - 1; j < nums.length; j++) {
+			for (int l = i; l < k + i; l++) {
+				sum += nums[l];
+			}
+
+			max_avg = Math.max(max_avg, sum /= k);
+			sum = 0;
+			i++;
+
+		}
+		return max_avg;
+	}
+
+	static String dayOfProgrammer(int year) {
+		int day;
+		if (year % 400 == 0 || (year % 4 == 0) && (year % 100 != 0))
+			day = 256 - 244;
+
+		else
+			day = 256 - 243;
+		if (year < 1918)
+			return --day + ".09." + year;
+		return day + ".09." + year;
+
+	}
+
+	static int birthday(List<Integer> s, int d, int m) {
+		if (m > s.size())
+			return 0;
+		int run_sum = 0;
+		int i = 0;
+		int count = 0;
+		for (int j = m - 1; j < s.size(); j++) {
+			for (int k = i; k <= j; k++) {
+				run_sum += s.get(k);
+			}
+			if (run_sum == d)
+				count++;
+			run_sum = 0;
+			i++;
+		}
+		return count;
+
+	}
+
+	static int[] breakingRecords(int[] scores) {
+		int[] record_scores = new int[2];
+		int highest = scores[0];
+		int lowest = scores[0];
+		for (int i : scores) {
+			if (i > highest) {
+				record_scores[0]++;
+				highest = i;
+			}
+
+			if (i < lowest) {
+				record_scores[1]++;
+				lowest = i;
+			}
+		}
+
+		return record_scores;
+
+	}
+
+	static String isValid(String s) {
+		int greaterThanTwo = 0;
+		HashMap<Character, Integer> map = new HashMap();
+		for (char c : s.toCharArray()) {
+			if (map.containsKey(c))
+				map.put(c, map.get(c) + 1);
+
+			else
+				map.put(c, 1);
+		}
+		Set<Integer> set = new HashSet();
+		for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+			set.add(entry.getValue());
+		}
+
+		if (greaterThanTwo > 1)
+			return "NO";
+		return "YES";
+	}
+
+	static String timeConversion(String s) {
+		/*
+		 * Write your code here.
+		 */
+		boolean isAM = s.contains("AM");
+		System.out.println(isAM);
+		s = s.substring(0, s.length() - 2);
+		String res = "";
+		String[] formatted_time = s.split(":");
+		int val = Integer.parseInt(formatted_time[0]);
+		if (val < 12 && !isAM) {
+			val += 12;
+		}
+		if (val == 12 && isAM)
+			val = 0;
+		if (val < 12) {
+			return "0" + val + ":" + formatted_time[1] + ":" + formatted_time[2];
+		}
+		return val + ":" + formatted_time[1] + ":" + formatted_time[2];
+
+	}
+
+	static void miniMaxSum(int[] arr) {
+		Arrays.sort(arr);
+		long max = 0;
+		long min = 0;
+		for (int i = arr.length - 1; i > 0; i--) {
+			max += arr[i];
+		}
+		for (int i = 0; i < arr.length - 1; i++) {
+			min += arr[i];
+		}
+		System.out.println(min + " " + max);
+	}
+
+	public static int[] findErrorNums(int[] nums) {
+		int[] res = new int[2];
+
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i] == nums[i - 1]) {
+				res[0] = nums[i - 1];
+				res[1] = i + 1;
+				break;
+			}
+		}
+		return res;
+	}
+
+	public static int rotatedDigits(int N) {
+		String s = "";
+		int count = 0;
+		for (int i = 1; i <= N; i++) {
+			s = String.valueOf(i);
+			if (s.indexOf('4') == -1 && s.indexOf('1') == -1 && s.indexOf('3') == -1 && s.indexOf('7') == -1
+					&& s.indexOf('0') == -1 && s.indexOf('8') == -1) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static int addDigits(int num) {
+		if (num < 10)
+			return num;
+
+		int temp = num;
+		int sum = 0;
+		int num_digits = String.valueOf(num).length();
+		while (num_digits > 1) {
+			sum = 0;
+			while (temp >= 1) {
+				int val = temp % 10;
+				temp /= 10;
+				sum += val;
+			}
+			temp = sum;
+			num_digits = String.valueOf(sum).length();
+
+		}
+
+		return sum;
+	}
+
+	public static boolean isAnagram(String s, String t) {
+		HashMap<Character, Integer> s1 = new HashMap();
+		HashMap<Character, Integer> t1 = new HashMap();
+		for (char c : s.toCharArray()) {
+			if (s1.containsKey(c))
+				s1.put(c, s1.get(c) + 1);
+
+			else
+				s1.put(c, 1);
+		}
+		for (char c : t.toCharArray()) {
+			if (t1.containsKey(c))
+				t1.put(c, t1.get(c) + 1);
+
+			else
+				t1.put(c, 1);
+		}
+
+		return s1.equals(t1);
+	}
+
+	public static int getBattery(List<Integer> events) {
+		// Write your code here
+		int batteryLevel = 50;
+		for (int i = 0; i < events.size(); i++) {
+			if (events.get(i) > 0) {
+				if (batteryLevel + events.get(i) >= 100)
+					batteryLevel = 100;
+
+				else
+					batteryLevel += events.get(i);
+			}
+
+			else {
+				if (batteryLevel - events.get(i) < 0)
+					batteryLevel = 0;
+
+				else
+					batteryLevel += events.get(i);
+			}
+		}
+
+		return batteryLevel;
+
+	}
+
 	public static int distanceBetweenBusStops(int[] distance, int start, int destination) {
 		int distanceTravelledForward = 0;
-        int distanceTravelledBackwards = 0;
-        for(int i = start; i < destination; i ++){
-            distanceTravelledForward += distance[i];
-        }
-        
-        for(int i = destination; i != start; i --){
-            distanceTravelledBackwards += distance[i];
-        }
-        
-        if(distanceTravelledBackwards < distanceTravelledForward) return distanceTravelledBackwards;
-        
-        return distanceTravelledForward;
-    }
+		int distanceTravelledBackwards = 0;
+		for (int i = start; i < destination; i++) {
+			distanceTravelledForward += distance[i];
+		}
+
+		for (int i = destination; i != start; i--) {
+			distanceTravelledBackwards += distance[i];
+		}
+
+		if (distanceTravelledBackwards < distanceTravelledForward)
+			return distanceTravelledBackwards;
+
+		return distanceTravelledForward;
+	}
 
 	public static int longestCommonSubsequence(String text1, String text2) {
 		int i = 0;
