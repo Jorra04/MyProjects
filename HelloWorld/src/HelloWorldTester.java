@@ -163,10 +163,49 @@ public class HelloWorldTester {
 //		System.out.println(searchMatrix(matrix, 1));
 //		int [] A = {1,1};
 //		System.out.println(numSubarraysWithSum(A, 1));
-		int [] nums = {3,6,5,1,8};
-		System.out.println(maxSumDivThree(nums));
+//		int [] nums = {3,6,5,1,8};
+//		System.out.println(maxSumDivThree(nums));
+//		System.out.println(canConstruct("aa","aab"));
+//		System.out.println(Integer.bitCount(7));
+//		String s = "sss";
+//		System.out.println(s.contains("s"));
+		System.out.println(isPrefixOfWord("hellohello hellohellohello", "ell"));
+		
 		
 	}
+	
+	
+	public static int isPrefixOfWord(String sentence, String searchWord) {
+        String[] words = sentence.split("\\s+");
+        for(int i = 0; i < words.length; i ++){
+            if(words[i].indexOf(searchWord) == 0) return i+1;
+        }
+        return -1;
+    }
+	
+	public static boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> ransom = new HashMap<>();
+        HashMap<Character, Integer> mag = new HashMap<>();
+        
+        for(char c : ransomNote.toCharArray()){
+            if(ransom.containsKey(c)) ransom.put(c, ransom.get(c) +1 );
+            
+            else ransom.put(c,1 );
+        }
+        for(char c : magazine.toCharArray()){
+            if(mag.containsKey(c)) mag.put(c, mag.get(c) +1 );
+            
+            else mag.put(c,1 );
+        }
+        
+        for(Map.Entry<Character, Integer> entry : ransom.entrySet()){
+            Character key = entry.getKey();
+            if(!mag.containsKey(key)) return false; 
+            if(mag.get(key) < entry.getValue()) return false;
+            
+        }
+        return true;
+    }
 	
 	public static int maxSumDivThree(int[] nums) {
         int sum = 0;
@@ -596,44 +635,8 @@ public class HelloWorldTester {
 		}
 	}
 
-	public static boolean canConstruct(String ransomNote, String magazine) {
-		HashMap<Character, Integer> ransom = new HashMap<>();
-		HashMap<Character, Integer> mag = new HashMap<>();
+	
 
-		for (char c : ransomNote.toCharArray()) {
-			if (ransom.containsKey(c))
-				ransom.put(c, ransom.get(c) + 1);
-
-			else
-				ransom.put(c, 1);
-		}
-		for (char c : magazine.toCharArray()) {
-			if (mag.containsKey(c))
-				mag.put(c, mag.get(c) + 1);
-
-			else
-				mag.put(c, 1);
-		}
-
-		for (Map.Entry<Character, Integer> entry : mag.entrySet()) {
-			Character key = entry.getKey();
-			Integer val1 = entry.getValue();
-//            if(!ransom.containsKey(key)) return false;
-			Integer val2 = mag.get(key);
-			if (val1 < val2)
-				return false;
-		}
-		return true;
-	}
-
-	public static int isPrefixOfWord(String sentence, String searchWord) {
-		String[] words = sentence.split("\\s+");
-		for (int i = 0; i < words.length; i++) {
-			if (words[i].contains(searchWord))
-				return i + 1;
-		}
-		return -1;
-	}
 
 	public static int maxPower(String s) {
 		int i = 0;
