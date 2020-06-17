@@ -169,10 +169,90 @@ public class HelloWorldTester {
 //		System.out.println(Integer.bitCount(7));
 //		String s = "sss";
 //		System.out.println(s.contains("s"));
-		System.out.println(isPrefixOfWord("hellohello hellohellohello", "ell"));
+//		System.out.println(isPrefixOfWord("hellohello hellohellohello", "ell"));
+//		System.out.println(longestCommonSubsequence("bl", "yby"));
+//		System.out.println(detectCapitalUse("FlaG"));
+//		int[] nums = {2,0,2,1,1,0,2,1,1,0,2,1,1,1,1,1,0,0};
+//		sortColors(nums);
+//		arrayPrinter(nums);
+		
+//		int[] nums1 = {4,1,2};
+//		int[] nums2 = {1,3,4,2};
+//		arrayPrinter(nextGreaterElement(nums1, nums2));
+		
+		System.out.println(removeDuplicates("abbaca"));
 		
 		
 	}
+	public static String removeDuplicates(String S) {
+        String res = "";
+        Stack<Character> stack = new Stack();
+        for(char c: S.toCharArray()){
+           if(stack.isEmpty()) stack.push(c);
+            
+            else if(stack.peek() != c) stack.push(c);
+            
+            else stack.pop();
+        }
+        
+        for(char c : stack){
+            res += c ;
+        }
+ 
+        
+        return res;
+    }
+	
+	public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int [] res = new int[nums1.length];
+        HashSet<Integer> set1 = new HashSet();
+        
+        for(int i : nums2){
+            set1.add(i);
+        }
+        for(int i = 0; i < nums1.length; i ++){
+            res[i] = nextGreater(set1, nums1[i]);
+        }
+        
+        return res;
+    }
+    
+    public static int nextGreater(Set<Integer> set,int num){
+        for(int i : set){
+            if(i > num) return i;
+        }
+        return -1;
+    }
+	
+	public static void sortColors(int[] nums) {
+		int reds = 0;
+        int white = 0;
+        int blue = 0;
+        for(int i : nums){
+            if(i == 0) reds ++;
+            
+            else if(i == 1) white ++;
+            
+            else blue ++;
+        }
+        for(int i = 0; i < reds; i ++){
+            nums[i] = 0;
+        }
+        for(int i = reds; i < white + reds; i ++){
+            nums[i] = 1;
+        }
+        for(int i = white + reds; i < nums.length; i ++){
+            nums[i] = 2;
+        }
+    }
+	
+	public static boolean detectCapitalUse(String word) {
+        if(word.length() == 1) return ((int)word.charAt(0) >= 65  &&  (int)word.charAt(0) <= 90);  
+        for(char c: word.toCharArray()){
+            if( !((int) c >= 65  && (int) c <= 90) ) return false;
+        }
+        return true;
+    }
 	
 	
 	public static int isPrefixOfWord(String sentence, String searchWord) {
