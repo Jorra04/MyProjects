@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HelloWorldTester {
 
@@ -175,194 +176,496 @@ public class HelloWorldTester {
 //		int[] nums = {2,0,2,1,1,0,2,1,1,0,2,1,1,1,1,1,0,0};
 //		sortColors(nums);
 //		arrayPrinter(nums);
-		
+
 //		int[] nums1 = {4,1,2};
 //		int[] nums2 = {1,3,4,2};
 //		arrayPrinter(nextGreaterElement(nums1, nums2));
-		
-		System.out.println(removeDuplicates("abbaca"));
-		
-		
+
+//		System.out.println(removeDuplicates("abbaca"));
+//		int[] T = {73, 74, 75, 71, 69, 72, 76, 73};
+//		arrayPrinter(dailyTemperatures(T));
+
+//		int[][] mat = { { 1, 0, 0, 0 }, { 1, 1, 1, 1 }, { 1, 0, 0, 0 }, { 1, 0, 0, 0 } };
+//		arrayPrinter(kWeakestRows(mat, 2));
+
+//		System.out.println(balancedStringSplit("RLRRRLLRLL"));
+//		int[] nums = {0,1,1,0};
+//		System.out.println(findMaxLength(nums));
+//		System.out.println(arrangeWords("Keep calm and code on"));
+//		System.out.println(Integer.bitCount(10));
+//		String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+//		System.out.println(groupAnagrams(strs));
+//		int[] nums = {1,0,3,5,9,12};
+//		System.out.println(search(nums, 0));
+
+//		Integer[] arr = {1,2,3,4};
+//		Arrays.sort(arr, new Comparator<Integer>() {
+//			@Override
+//			public int compare(Integer a, Integer b) {
+//				if(Integer.bitCount(a) > Integer.bitCount(a)) return 1;
+//				
+//				else if(Integer.bitCount(a) < Integer.bitCount(a)) return -1;
+//				
+//				return 0;
+//			}
+//		});
+//		for(Integer i : arr) {
+//			System.out.println(i);
+//		}
+//		String[] sentence = {"Hello","Goodbye","Good", "To","See", "Avacado"};
+//		Arrays.sort(sentence, new Comparator<String>() {
+//			@Override
+//			public int compare(String s, String t) {
+//				if(s.length() > t.length()) return 1;
+//				
+//				else if(s.length() < t.length()) return -1;
+//				
+//				return 0;
+//			}
+//		});
+//		
+//		for(String s : sentence) {
+//			System.out.println(s);
+//		}
+//		HashMap<Integer, Integer> mymap = new HashMap();
+//		System.out.println(frequencySort("loveleetcode"));
+		int[] nums = {-7,-6,-5,1,2,3,4};
+		System.out.println(maximumProduct(nums));
 	}
+	
+	public static int maximumProduct(int[] nums) {
+        Arrays.sort(nums);
+        
+        return Math.max(nums[0]*nums[1] * nums[nums.length -1],nums[nums.length -1] *nums[nums.length -2] *nums[nums.length -3]);
+    }
+
+	public static String frequencySort(String s) {
+		String res = "";
+		Character[] chars = new Character[s.length()];
+		for(int i = 0; i < s.length(); i ++) {
+			chars[i] = s.charAt(i);
+		}
+		Arrays.sort(chars);
+		Arrays.sort(chars, new Comparator<Character>() {
+			@Override
+			public int compare(Character c, Character v) {
+				if(getCharFreq(s, c) > getCharFreq(s, v)) return -1;
+				
+				else if(getCharFreq(s, c) < getCharFreq(s, v)) return 1;
+				
+				return 0;
+			}
+		});
+		for(char c : chars) {
+			res +=c;
+		}
+		return res;
+	}
+	public static int getCharFreq(String s, char c) {
+		int count = 0;
+		for(int i = 0; i < s.length(); i ++) {
+			if(s.charAt(i) == c ) count ++;
+		}
+		
+		return count;
+	}
+
+	public static int search(int[] nums, int target) {
+		int pivot, left = 0, right = nums.length - 1;
+		while (left <= right) {
+			pivot = left + (right - left) / 2;
+			if (nums[pivot] == target)
+				return pivot;
+			if (target < nums[pivot])
+				right = pivot - 1;
+			else
+				left = pivot + 1;
+		}
+		return -1;
+	}
+
+	public static List<List<String>> groupAnagrams(String[] strs) {
+		List<List<String>> result = new ArrayList();
+		List<String> temp = new ArrayList();
+		for (int i = 0; i < strs.length; i++) {
+			temp = new ArrayList();
+			for (int j = 0; j < strs.length; j++) {
+				if (isAnangram(strs[i], strs[j]) && i != j) {
+					temp.add(strs[j]);
+				}
+			}
+			result.add(temp);
+		}
+
+		return result;
+	}
+
+	public static boolean isAnangram(String s, String t) {
+		HashMap<Character, Integer> map1 = new HashMap();
+		HashMap<Character, Integer> map2 = new HashMap();
+
+		for (char c : s.toCharArray()) {
+			if (map1.containsKey(c))
+				map1.put(c, map1.get(c) + 1);
+
+			else
+				map1.put(c, 1);
+		}
+
+		for (char c : t.toCharArray()) {
+			if (map2.containsKey(c))
+				map2.put(c, map2.get(c) + 1);
+
+			else
+				map2.put(c, 1);
+		}
+
+		for (Map.Entry<Character, Integer> entry : map1.entrySet()) {
+			if (map2.get(entry.getKey()) != entry.getValue())
+				return false;
+		}
+
+		return true;
+	}
+
+	public int[] sortByBits(int[] arr) {
+		Integer[] sorted = new Integer[arr.length];
+		for (int i = 0; i < sorted.length; i++) {
+			sorted[i] = arr[i];
+		}
+		Arrays.sort(sorted, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer a, Integer b) {
+				if (Integer.bitCount(a) > Integer.bitCount(b))
+					return -1;
+
+				if (Integer.bitCount(a) < Integer.bitCount(b))
+					return 1;
+
+				return 0;
+			}
+		});
+		for (int i : sorted)
+			System.out.println(i);
+		return arr;
+	}
+
+	public static String arrangeWords(String text) {
+		text = text.toLowerCase();
+		String[] sentence = text.split("\\s+");
+		Arrays.sort(sentence, new Comparator<String>() {
+			@Override
+			public int compare(String i, String j) {
+				return -1;
+			}
+		});
+		Arrays.sort(sentence, new Comparator<String>() {
+			@Override
+			public int compare(String a, String b) {
+				if (a.length() < b.length()) {
+					return -1;
+				}
+				if (a.length() > b.length()) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+		StringBuilder res = new StringBuilder();
+		for (int i = 0; i < sentence.length; i++) {
+			if (i == sentence.length - 1) {
+				res.append(sentence[i]);
+			} else {
+				res.append(sentence[i] + " ");
+			}
+		}
+		res.setCharAt(0, Character.toUpperCase(res.charAt(0)));
+		return res.toString();
+
+	}
+
+	public static int findMaxLength(int[] nums) {
+		int i = 0;
+		int ones = 0;
+		int zeros = 0;
+		int max = 1;
+		for (int j = 0; j < nums.length; j++) {
+			if (nums[j] == 1)
+				ones++;
+
+			else
+				zeros++;
+
+			if (ones == zeros) {
+				ones = 0;
+				zeros = 0;
+				max = Math.max(max, j - i + 1);
+				i = j;
+			}
+		}
+		return max;
+	}
+
+	public static int balancedStringSplit(String s) {
+		int i = 0;
+		int rights = 0;
+		int lefts = 0;
+		int result = 0;
+		for (int j = 0; j < s.length(); j++) {
+			if (s.charAt(j) == 'R')
+				rights++;
+
+			else
+				lefts++;
+
+			if (rights == lefts) {
+				rights = 0;
+				lefts = 0;
+				result++;
+				i = j;
+			}
+		}
+		return result;
+	}
+
+	public static int[] kWeakestRows(int[][] mat, int k) {
+		HashMap<Integer, Integer> soldiers = new HashMap();
+		int[] res = new int[k];
+		int soldierCount = 0;
+		int i = 0;
+		for (int[] row : mat) {
+			soldierCount = 0;
+			for (int lvl : row) {
+				soldierCount += lvl;
+			}
+			soldiers.put(i, soldierCount);
+			i++;
+		}
+		soldiers = soldiers.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		System.out.println(soldiers);
+		i = 0;
+		for (Map.Entry<Integer, Integer> entry : soldiers.entrySet()) {
+			if (i >= k)
+				break;
+			res[i] = entry.getKey();
+			i++;
+		}
+		return res;
+	}
+
+	public static int[] dailyTemperatures(int[] T) {
+		int[] res = new int[T.length];
+		for (int i = 0; i < T.length; i++) {
+			res[i] = nextGreatest(T, i, T[i]);
+		}
+		return res;
+	}
+
+	public static int nextGreatest(int[] arr, int index, int lastGreatest) {
+		for (int i = index; i < arr.length; i++) {
+			if (arr[i] > lastGreatest)
+				return i - index;
+		}
+
+		return 0;
+	}
+
 	public static String removeDuplicates(String S) {
-        String res = "";
-        Stack<Character> stack = new Stack();
-        for(char c: S.toCharArray()){
-           if(stack.isEmpty()) stack.push(c);
-            
-            else if(stack.peek() != c) stack.push(c);
-            
-            else stack.pop();
-        }
-        
-        for(char c : stack){
-            res += c ;
-        }
- 
-        
-        return res;
-    }
-	
+		String res = "";
+		Stack<Character> stack = new Stack();
+		for (char c : S.toCharArray()) {
+			if (stack.isEmpty())
+				stack.push(c);
+
+			else if (stack.peek() != c)
+				stack.push(c);
+
+			else
+				stack.pop();
+		}
+
+		for (char c : stack) {
+			res += c;
+		}
+
+		return res;
+	}
+
 	public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int [] res = new int[nums1.length];
-        HashSet<Integer> set1 = new HashSet();
-        
-        for(int i : nums2){
-            set1.add(i);
-        }
-        for(int i = 0; i < nums1.length; i ++){
-            res[i] = nextGreater(set1, nums1[i]);
-        }
-        
-        return res;
-    }
-    
-    public static int nextGreater(Set<Integer> set,int num){
-        for(int i : set){
-            if(i > num) return i;
-        }
-        return -1;
-    }
-	
+		int[] res = new int[nums1.length];
+		HashSet<Integer> set1 = new HashSet();
+
+		for (int i : nums2) {
+			set1.add(i);
+		}
+		for (int i = 0; i < nums1.length; i++) {
+			res[i] = nextGreater(set1, nums1[i]);
+		}
+
+		return res;
+	}
+
+	public static int nextGreater(Set<Integer> set, int num) {
+		for (int i : set) {
+			if (i > num)
+				return i;
+		}
+		return -1;
+	}
+
 	public static void sortColors(int[] nums) {
 		int reds = 0;
-        int white = 0;
-        int blue = 0;
-        for(int i : nums){
-            if(i == 0) reds ++;
-            
-            else if(i == 1) white ++;
-            
-            else blue ++;
-        }
-        for(int i = 0; i < reds; i ++){
-            nums[i] = 0;
-        }
-        for(int i = reds; i < white + reds; i ++){
-            nums[i] = 1;
-        }
-        for(int i = white + reds; i < nums.length; i ++){
-            nums[i] = 2;
-        }
-    }
-	
+		int white = 0;
+		int blue = 0;
+		for (int i : nums) {
+			if (i == 0)
+				reds++;
+
+			else if (i == 1)
+				white++;
+
+			else
+				blue++;
+		}
+		for (int i = 0; i < reds; i++) {
+			nums[i] = 0;
+		}
+		for (int i = reds; i < white + reds; i++) {
+			nums[i] = 1;
+		}
+		for (int i = white + reds; i < nums.length; i++) {
+			nums[i] = 2;
+		}
+	}
+
 	public static boolean detectCapitalUse(String word) {
-        if(word.length() == 1) return ((int)word.charAt(0) >= 65  &&  (int)word.charAt(0) <= 90);  
-        for(char c: word.toCharArray()){
-            if( !((int) c >= 65  && (int) c <= 90) ) return false;
-        }
-        return true;
-    }
-	
-	
+		if (word.length() == 1)
+			return ((int) word.charAt(0) >= 65 && (int) word.charAt(0) <= 90);
+		for (char c : word.toCharArray()) {
+			if (!((int) c >= 65 && (int) c <= 90))
+				return false;
+		}
+		return true;
+	}
+
 	public static int isPrefixOfWord(String sentence, String searchWord) {
-        String[] words = sentence.split("\\s+");
-        for(int i = 0; i < words.length; i ++){
-            if(words[i].indexOf(searchWord) == 0) return i+1;
-        }
-        return -1;
-    }
-	
+		String[] words = sentence.split("\\s+");
+		for (int i = 0; i < words.length; i++) {
+			if (words[i].indexOf(searchWord) == 0)
+				return i + 1;
+		}
+		return -1;
+	}
+
 	public static boolean canConstruct(String ransomNote, String magazine) {
-        HashMap<Character, Integer> ransom = new HashMap<>();
-        HashMap<Character, Integer> mag = new HashMap<>();
-        
-        for(char c : ransomNote.toCharArray()){
-            if(ransom.containsKey(c)) ransom.put(c, ransom.get(c) +1 );
-            
-            else ransom.put(c,1 );
-        }
-        for(char c : magazine.toCharArray()){
-            if(mag.containsKey(c)) mag.put(c, mag.get(c) +1 );
-            
-            else mag.put(c,1 );
-        }
-        
-        for(Map.Entry<Character, Integer> entry : ransom.entrySet()){
-            Character key = entry.getKey();
-            if(!mag.containsKey(key)) return false; 
-            if(mag.get(key) < entry.getValue()) return false;
-            
-        }
-        return true;
-    }
-	
+		HashMap<Character, Integer> ransom = new HashMap<>();
+		HashMap<Character, Integer> mag = new HashMap<>();
+
+		for (char c : ransomNote.toCharArray()) {
+			if (ransom.containsKey(c))
+				ransom.put(c, ransom.get(c) + 1);
+
+			else
+				ransom.put(c, 1);
+		}
+		for (char c : magazine.toCharArray()) {
+			if (mag.containsKey(c))
+				mag.put(c, mag.get(c) + 1);
+
+			else
+				mag.put(c, 1);
+		}
+
+		for (Map.Entry<Character, Integer> entry : ransom.entrySet()) {
+			Character key = entry.getKey();
+			if (!mag.containsKey(key))
+				return false;
+			if (mag.get(key) < entry.getValue())
+				return false;
+
+		}
+		return true;
+	}
+
 	public static int maxSumDivThree(int[] nums) {
-        int sum = 0;
-        int max_sum = 0;
-        for(int i = 0; i < nums.length; i ++){
-            for(int j = i; j < nums.length;j++){
-                sum += nums[j];
-                if(sum %3  == 0) {
-                    max_sum = Math.max(sum,max_sum);
-                }
-                sum = 0;
-            }
-        }
-        return max_sum;
-    }
-	
+		int sum = 0;
+		int max_sum = 0;
+		for (int i = 0; i < nums.length; i++) {
+			for (int j = i; j < nums.length; j++) {
+				sum += nums[j];
+				if (sum % 3 == 0) {
+					max_sum = Math.max(sum, max_sum);
+				}
+				sum = 0;
+			}
+		}
+		return max_sum;
+	}
+
 	public static int numSubarraysWithSum(int[] A, int S) {
-        int count = 0;
-        int sum = 0;
-        for(int i = 0 ;i < A.length; i ++){
-            sum = 0;
-            for(int j = i; j < A.length; j ++){
-                sum+=A[j];
-                if(sum == S) count ++;
-            }
-        }
-        
-        return count;
-    }
-	
+		int count = 0;
+		int sum = 0;
+		for (int i = 0; i < A.length; i++) {
+			sum = 0;
+			for (int j = i; j < A.length; j++) {
+				sum += A[j];
+				if (sum == S)
+					count++;
+			}
+		}
+
+		return count;
+	}
+
 	public static boolean searchMatrix(int[][] matrix, int target) {
-        for(int[] inner : matrix){
-            if(Arrays.binarySearch(inner, target) >= 0) return true;
-        }
-        
-        return false;
-    }
-	
-	
+		for (int[] inner : matrix) {
+			if (Arrays.binarySearch(inner, target) >= 0)
+				return true;
+		}
+
+		return false;
+	}
+
 	public static List<Integer> findDuplicates(int[] nums) {
-        List<Integer> res = new ArrayList();
-        for(int i = 0; i < nums.length; i ++){
-            if(nums[Math.abs(nums[i]) -1] < 0) res.add(Math.abs(nums[i]));
-            
-            else nums[Math.abs(nums[i]) -1] *= -1;
-        }
-        return res;
-    }
-	
+		List<Integer> res = new ArrayList();
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[Math.abs(nums[i]) - 1] < 0)
+				res.add(Math.abs(nums[i]));
+
+			else
+				nums[Math.abs(nums[i]) - 1] *= -1;
+		}
+		return res;
+	}
+
 	public static int[] sortedSquares(int[] A) {
-        int[] res = new int[A.length];
-        int i = 0;
-        int j = A.length -1;
-        int pointer = A.length -1;
-        while(i <= j) {
-        	if(A[i] * A[i] >= A[j] * A[j]) {
-        		res[pointer--] = A[i] * A[i];
-        		i++;
-        	}
-        	else if(A[i] * A[i] < A[j] * A[j]) {
-        		res[pointer--] = A[j] * A[j];
-        		j--;
-        	}
-        }
-        return res;
-    }
+		int[] res = new int[A.length];
+		int i = 0;
+		int j = A.length - 1;
+		int pointer = A.length - 1;
+		while (i <= j) {
+			if (A[i] * A[i] >= A[j] * A[j]) {
+				res[pointer--] = A[i] * A[i];
+				i++;
+			} else if (A[i] * A[i] < A[j] * A[j]) {
+				res[pointer--] = A[j] * A[j];
+				j--;
+			}
+		}
+		return res;
+	}
 
 	public static int subarraysDivByK(int[] A, int K) {
 		int num_divisible = 0;
-		
+
 		int curr_sum = A[0];
-		for(int i = 1; i < A.length; i ++) {
+		for (int i = 1; i < A.length; i++) {
 			curr_sum = Math.max(A[i], curr_sum + A[i]);
-			if(curr_sum % K == 0) num_divisible ++;
+			if (curr_sum % K == 0)
+				num_divisible++;
 		}
-		
-		
+
 		return num_divisible;
 	}
 
@@ -714,9 +1017,6 @@ public class HelloWorldTester {
 			nums1[i] = pq.remove();
 		}
 	}
-
-	
-
 
 	public static int maxPower(String s) {
 		int i = 0;
