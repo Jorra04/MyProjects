@@ -229,44 +229,290 @@ public class HelloWorldTester {
 //		}
 //		HashMap<Integer, Integer> mymap = new HashMap();
 //		System.out.println(frequencySort("loveleetcode"));
-		int[] nums = {-7,-6,-5,1,2,3,4};
-		System.out.println(maximumProduct(nums));
+//		int[] nums = {-7,-6,-5,1,2,3,4};
+//		System.out.println(maximumProduct(nums));
+//		System.out.println(isSubsequence("lol", "asklinogl"));
+//		int[]arr1 = {2,1,100,3};
+//		int[]arr2 = {-5,-2,10,-3,7};
+//		System.out.println(findTheDistanceValue(arr1, arr2, 6));
+//		System.out.println(hammingDistance(5, 8));
+//		int[] nums = {-2,0,-1};
+//		System.out.println(maxProduct(nums));
+//		System.out.println(frequencySort("Aabb"));
+//		int[]nums = {3,1,2,10,1};
+//		arrayPrinter(runningSum(nums));
+//		int[] nums = {3,7};
+//		System.out.println(maxProductOf2(nums));
+//		int[] nums = {1,1,1,2,2,3};
+//		arrayPrinter(topKFrequent(nums, 2));
+//		int[] arr = {1024,512,256,128,64,32,16,8,4,2,1};
+//		int[] ans = {1,2,4,8,16,32,64,128,256,512,1024};
+//		arrayPrinter(sortByBits(arr));
+//		String[] words = {"a", "bb", "acd", "ace"};
+//		System.out.println(numMatchingSubseq("abcde", words));
+//		System.out.println(isSubsequence("a", "abcde"));
+		
+//		int[][] coordinates = {{1,-8},{2,-3},{1,2}};
+//		System.out.println(checkStraightLine(coordinates));
+//		char[] string = {'a','b','c','d','e','f','g'};
+//		System.out.println(partial_reverse(string, 2, 5));
+		List<Integer> intlist = new ArrayList();
+		intlist.add(1);
+		intlist.add(4);
+		intlist.add(3);
+		intlist.add(2);
+		intlist.add(5);
+		intlist.add(2);
+		System.out.println(partitionList(intlist, 3));
+	
 	}
 	
-	public static int maximumProduct(int[] nums) {
-        Arrays.sort(nums);
+	
+	public static List<Integer> partitionList(List<Integer> list, int k){
+        List<Integer> res = new ArrayList();
+        for(int i : list) {
+            if(i < k) res.add(i);
+        }
         
-        return Math.max(nums[0]*nums[1] * nums[nums.length -1],nums[nums.length -1] *nums[nums.length -2] *nums[nums.length -3]);
+        for(int i : list){
+            if(i >= k) res.add(i);
+        }
+        System.out.println(res);
+        return res;
     }
-
-	public static String frequencySort(String s) {
-		String res = "";
-		Character[] chars = new Character[s.length()];
-		for(int i = 0; i < s.length(); i ++) {
-			chars[i] = s.charAt(i);
-		}
-		Arrays.sort(chars);
-		Arrays.sort(chars, new Comparator<Character>() {
-			@Override
-			public int compare(Character c, Character v) {
-				if(getCharFreq(s, c) > getCharFreq(s, v)) return -1;
-				
-				else if(getCharFreq(s, c) < getCharFreq(s, v)) return 1;
-				
-				return 0;
-			}
-		});
-		for(char c : chars) {
-			res +=c;
-		}
-		return res;
-	}
-	public static int getCharFreq(String s, char c) {
-		int count = 0;
-		for(int i = 0; i < s.length(); i ++) {
-			if(s.charAt(i) == c ) count ++;
+	
+	
+	public static char[] partial_reverse(char[] string, int i, int j) {
+		if(string.length <=1) return string;
+		i--;
+		j--;
+		while(i < j) {
+			char temp = string[i];
+			string[i++] = string[j];
+			string[j--] = temp;
 		}
 		
+		return string;
+	}
+	
+	public static boolean judgeSquareSum(int c) {
+        for(int i = 0; i <= Math.sqrt(c); i ++){
+            for(int j = 0; j <= Math.sqrt(c); j ++){
+                if(Math.pow(i,2) + Math.pow(j,2) == c) return true;
+            }
+        }
+        return false;
+    }
+	
+	public static boolean checkStraightLine(int[][] coordinates) {
+        double deltaX = coordinates[0][0] - coordinates[1][0];
+        double deltaY = coordinates[0][1] - coordinates[1][1];
+        double origSlope = deltaY/deltaX;
+        for(int i = 1; i < coordinates.length; i ++ ){
+            for(int j = 1 ; j < coordinates[i].length; j ++ ){
+             
+                deltaX = coordinates[i][j-1] - coordinates[i -1 ][j-1];
+                deltaY = coordinates[i][j] - coordinates[i-1][j];
+                double newSlope = deltaY/deltaX;
+                if(Math.abs(newSlope) != Math.abs(origSlope)) return false;
+            }
+        }
+        return true;
+    }
+	public static int numMatchingSubseq(String S, String[] words) {
+        int count = 0;
+        for(String word : words){
+            if(isSubsequence(word, S)) count ++;
+        }
+        
+        return count;
+    }
+	public static int[] sortByBits(int[] arr) {
+        Integer[] sorted = new Integer[arr.length];
+		for(int i = 0; i < sorted.length; i ++) {
+			sorted[i] = arr[i];
+		}
+		Arrays.sort(sorted, new Comparator<Integer>(){
+	           @Override
+	            public int compare(Integer a, Integer b){
+	                if(Integer.bitCount(a) > Integer.bitCount(b) ) return 1;
+	                
+	                if(Integer.bitCount(a) < Integer.bitCount(b) ) return -1;
+	                
+	                return 0;
+	            }
+	        });
+        for(int i = 0; i < sorted.length; i ++){
+            arr[i] = sorted[i];
+        }
+        return arr;
+    }
+	
+	public static int[] topKFrequent(int[] nums, int k) {
+//        if(nums.length == 1) return nums;
+//        int[] res = new int[k];
+//        HashMap<Integer, Integer> num_counts = new HashMap();
+//        for(int i : nums){
+//            if(num_counts.containsKey(i)) num_counts.put(i, num_counts.get(i) +1);
+//            
+//            else num_counts.put(i, 1);
+//        }
+//        
+//        num_counts = num_counts.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+//				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+//        System.out.println(num_counts);
+//        int i = 0;
+//        for(Map.Entry<Integer, Integer> entry : num_counts.entrySet()){
+//            if(i == k) break;
+//            
+//            res[i] = entry.getKey();
+//            i++;
+//        }
+//        
+//        return res;
+		 // O(1) time
+        if (k == nums.length) {
+            return nums;
+        }
+        
+        // 1. build hash map : character and how often it appears
+        // O(N) time
+        Map<Integer, Integer> count = new HashMap();
+        for (int n: nums) {
+          count.put(n, count.getOrDefault(n, 0) + 1);
+        }
+
+        // init heap 'the less frequent element first'
+        Queue<Integer> heap = new PriorityQueue<>(
+            (n1, n2) -> count.get(n1) - count.get(n2));
+
+        // 2. keep k top frequent elements in the heap
+        // O(N log k) < O(N log N) time
+        for (int n: count.keySet()) {
+          heap.add(n);
+          if (heap.size() > k) heap.poll();    
+        }
+
+        // 3. build an output array
+        // O(k log k) time
+        int[] top = new int[k];
+        for(int i = k - 1; i >= 0; --i) {
+            top[i] = heap.poll();
+        }
+        return top;
+    }
+	
+	public static int maxProductOf2(int[] nums) {
+        Arrays.sort(nums);
+        return Math.max( (nums[0]-1) * (nums[1]-1) , (nums[nums.length -1]-1) * (nums[nums.length -2]-1) );
+    }
+	
+	public static int[] runningSum(int[] nums) {
+        int run_sum  =0;
+        for(int i = 0; i < nums.length; i ++){
+            run_sum += nums[i];
+            nums[i] =  run_sum; 
+        }
+        
+        return nums;
+    }
+	
+	public static String frequencySort(String s) {
+        StringBuilder res = new StringBuilder();
+        HashMap<Character, Integer> char_count = new HashMap();
+        for(char c : s.toCharArray()){
+            if(char_count.containsKey(c)) char_count.put(c,char_count.get(c) +1);
+            
+            else char_count.put(c, 1);
+        }
+        char_count = char_count.entrySet().stream().sorted(Map.Entry.<Character, Integer>comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+//        System.out.println(char_count);
+        for(Map.Entry<Character, Integer> entry : char_count.entrySet()){
+            for(int i = 0; i < entry.getValue(); i ++){
+                res.append(entry.getKey());
+            }
+        }
+        return res.reverse().toString();
+	}
+	
+	public static int maxProduct(int[] nums) {
+        if(nums.length == 1) return nums[0];
+        int local_max = 1;
+        int global_max = Integer.MIN_VALUE;
+        for(int i =0; i < nums.length; i ++){
+//            local_max = Math.max(local_max, local_max * nums[i]);
+            if(local_max < local_max * nums[i]) {
+            	local_max = local_max * nums[i];
+            	
+            }
+            else {
+            	local_max = 1;
+            }
+            global_max = Math.max(global_max, local_max);
+        }
+        
+        return global_max;
+    }
+	
+	public static int hammingDistance(int x, int y) {
+        String bits1 = Integer.toBinaryString(x);
+        String bits2 = Integer.toBinaryString(y);
+        if(bits1.length() > bits2.length()){
+            for(int i = bits2.length(); i < bits1.length(); i ++){
+                bits2 = 0+bits2;
+            }
+        }
+        if(bits2.length() > bits1.length()){
+            for(int i = bits1.length(); i < bits2.length(); i ++){
+                bits1 = 0+bits1;
+            }
+        }
+        int distance = 0;
+        for(int i = 0; i < bits1.length(); i++){
+            if(bits1.charAt(i) != bits2.charAt(i)) distance ++;
+        }
+        return distance;
+    }
+	
+	public static int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int count = 0;
+        int j = 0;
+        for(int i = 0 ; i < arr1.length; i ++){
+            for(j = 0; j < arr2.length; j ++){
+                if(Math.abs(arr1[i] - arr2[j]) <= d) break;
+            }
+            if(j == arr2.length) count ++;
+        }
+        
+        return count;
+    }
+
+	public static boolean isSubsequence(String s, String t) {
+		int i = 0;
+		for(int j = 0; j < t.length(); j ++) {
+			if(i == s.length()) return true;
+			if(s.charAt(i) == t.charAt(j)) i++;
+		}
+		return i == s.length();
+	}
+
+	public static int maximumProduct(int[] nums) {
+		Arrays.sort(nums);
+
+		return Math.max(nums[0] * nums[1] * nums[nums.length - 1],
+				nums[nums.length - 1] * nums[nums.length - 2] * nums[nums.length - 3]);
+	}
+
+	
+
+	public static int getCharFreq(String s, char c) {
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == c)
+				count++;
+		}
+
 		return count;
 	}
 
@@ -328,27 +574,6 @@ public class HelloWorldTester {
 		return true;
 	}
 
-	public int[] sortByBits(int[] arr) {
-		Integer[] sorted = new Integer[arr.length];
-		for (int i = 0; i < sorted.length; i++) {
-			sorted[i] = arr[i];
-		}
-		Arrays.sort(sorted, new Comparator<Integer>() {
-			@Override
-			public int compare(Integer a, Integer b) {
-				if (Integer.bitCount(a) > Integer.bitCount(b))
-					return -1;
-
-				if (Integer.bitCount(a) < Integer.bitCount(b))
-					return 1;
-
-				return 0;
-			}
-		});
-		for (int i : sorted)
-			System.out.println(i);
-		return arr;
-	}
 
 	public static String arrangeWords(String text) {
 		text = text.toLowerCase();
@@ -669,17 +894,6 @@ public class HelloWorldTester {
 		return num_divisible;
 	}
 
-	public static int maxProduct(int[] nums) {
-		if (nums.length == 1)
-			return nums[0];
-		int max_prod = nums[0];
-		int curr_prod = nums[0];
-		for (int i = 1; i < nums.length; i++) {
-			curr_prod = Math.max(curr_prod, curr_prod * nums[i]);
-			max_prod = Math.max(max_prod, curr_prod);
-		}
-		return max_prod;
-	}
 
 	public static double findMaxAverage2(int[] nums, int k) {
 		double sum = 0;
@@ -1471,22 +1685,6 @@ public class HelloWorldTester {
 		return myTree;
 	}
 
-	public static boolean checkStraightLine(int[][] coordinates) {
-		double deltaX = coordinates[0][0] - coordinates[1][0];
-		double deltaY = coordinates[0][1] - coordinates[1][1];
-		double origSlope = deltaY / deltaX;
-		for (int i = 1; i < coordinates.length; i++) {
-			for (int j = 1; j < coordinates[i].length; j++) {
-
-				deltaX = coordinates[i][j - 1] - coordinates[i - 1][j - 1];
-				deltaY = coordinates[i][j] - coordinates[i - 1][j];
-				double newSlope = deltaY / deltaX;
-				if (newSlope != origSlope)
-					return false;
-			}
-		}
-		return true;
-	}
 
 	public static void arrayPrinter(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
@@ -1628,19 +1826,5 @@ public class HelloWorldTester {
 		}
 		return count;
 	}
-
-//	 public static String frequencySort(String s) {
-//	        HashMap<Character, Integer> myMap = new HashMap<>();
-//	        for(char c : s.toCharArray()){
-//	            if(myMap.containsKey(c)) myMap.put(c,myMap.get(c) +1);
-//	            
-//	            else myMap.put(c,1);
-//	        }
-//	        System.out.println(myMap);
-//	        for(Map.Entry<Character, Integer> entry : myMap.entrySet()){
-//	            
-//	        }
-//	        return " ";
-//	    }
 
 }
