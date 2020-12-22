@@ -113,10 +113,31 @@ public class EasyClass {
 //		String s = "ac";
 //		System.out.println(longestPalindrome(s));
 		
-		String allowed = "fstqyienx";
-		String[] words = {"n","eeitfns","eqqqsfs","i","feniqis","lhoa","yqyitei","sqtn","kug","z","neqqis"};
-		System.out.println(countConsistentStrings(allowed, words));
+//		String allowed = "fstqyienx";
+//		String[] words = {"n","eeitfns","eqqqsfs","i","feniqis","lhoa","yqyitei","sqtn","kug","z","neqqis"};
+//		System.out.println(countConsistentStrings(allowed, words));
 	
+//		String num1 = "1234";
+//		String num2 = "66";
+//		
+//		System.out.println(addStrings(num1, num2));
+		
+		
+//		PriorityQueue<String> pq = new PriorityQueue<>(3, (a,b) -> a.length() - b.length());
+//		
+//			pq.add("Hello");
+//			pq.add("Hello1");
+//			pq.add("Hello2");
+//			pq.add("Hello3");
+//			pq.add("Hello4");
+//		
+//		System.out.println(pq.size());
+//		
+//		System.out.println(pq);
+	
+		int[] nums = {-1,1,-6,4,5,-6,1,4,1};
+		System.out.println(frequencySort(nums));
+		
 		
 		
 		
@@ -744,6 +765,39 @@ public class EasyClass {
 	        }
 	        
 	        return count;
+	    }
+	    // [1,1,2,2,2,3]
+	    public static int[] frequencySort(int[] nums) {
+	    	Map<Integer, Integer> freq_map = new HashMap<>();
+	    	for(int i : nums) {
+	    		freq_map.put(i, freq_map.getOrDefault(i, 0) + 1);
+	    	}
+	    	
+	    	PriorityQueue<Integer> pq = new PriorityQueue<Integer>((a,b) -> {
+	    		if(freq_map.get(a) > freq_map.get(b)) {
+	    			return 1;
+	    		}
+	    		else if(freq_map.get(a).equals(freq_map.get(b)) ) {
+	    			return b-a;
+	    		}
+	    		return -1;
+	    	});
+	    	
+	    	for(Integer number : freq_map.keySet()) {
+	    		pq.add(number);
+	    	}
+	    	int count = 0;
+	    	
+	    	while(!pq.isEmpty()) {
+	    		int val = pq.peek();
+	    		int key = freq_map.get(pq.poll());
+	    		
+	    		for(int i = 0; i < key; i ++) {
+	    			nums[count++] = val;
+	    		}
+	    	}
+	    	
+	        return nums;
 	    }
 	    
 	   
