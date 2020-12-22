@@ -134,9 +134,18 @@ public class EasyClass {
 //		System.out.println(pq.size());
 //		
 //		System.out.println(pq);
-	
-		int[] nums = {-1,1,-6,4,5,-6,1,4,1};
-		System.out.println(frequencySort(nums));
+//	
+//		int[] nums = {-1,1,-6,4,5,-6,1,4,1};
+//		System.out.println(frequencySort(nums));
+		
+		int[][] points = {
+				{1,3},
+				{-2,2}
+		};
+		
+		int k = 1;
+		
+		System.out.println(kClosest(points, k));
 		
 		
 		
@@ -798,6 +807,25 @@ public class EasyClass {
 	    	}
 	    	
 	        return nums;
+	    }
+	    
+	    public static int[][] kClosest(int[][] points, int K) {
+	        PriorityQueue<int[]> max_heap = new PriorityQueue<>((a,b) ->{
+	        	if(Math.sqrt( (Math.pow(a[0], 2)) + (Math.pow(a[1], 2)) ) < Math.sqrt( (Math.pow(b[0], 2)) + (Math.pow(b[1], 2)) )) {
+	        		return -1;
+	        	}
+	        	return 1;
+	        });
+	        
+	        for(int[] arr : points) {
+	        	max_heap.add(arr);
+	        }
+	        int[][] res = new int[K][2];
+	        for(int i = 0; i <K; i ++) {
+	        	res[i] = max_heap.poll();
+	        }
+	      
+	        return res;
 	    }
 	    
 	   
