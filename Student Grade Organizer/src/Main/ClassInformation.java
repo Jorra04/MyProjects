@@ -68,10 +68,10 @@ public class ClassInformation {
 	
 	public void saveData() {
 		
-		File f = new File("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+		File f = new File(Credentials.path);
 		if(!f.exists() || f.isDirectory()) { 
 			try {
-			      File myObj = new File("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+			      File myObj = new File(Credentials.path);
 			      if (myObj.createNewFile()) {
 			        System.out.println("File created: " + myObj.getName());
 			      } else {
@@ -87,7 +87,7 @@ public class ClassInformation {
 			
 			
 			
-		      FileWriter myWriter = new FileWriter("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+		      FileWriter myWriter = new FileWriter(Credentials.path);
 		      String text = "========================= Student Data ==============================\n"
 		      		+ this.toString()
 		    		  +"\n========================= Top Student in Class ==============================\n"
