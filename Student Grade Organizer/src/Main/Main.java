@@ -30,7 +30,7 @@ public class Main {
 		course1.addStudent(s5 , Credentials.course1GPA5);
 		
 		
-		course2.addStudent(s1, Credentials.studentGPA1);
+		course2.addStudent(s1, Credentials.course2GPA1);
 		course2.addStudent(s2 , Credentials.course2GPA2);
 		course2.addStudent(s3 , Credentials.course2GPA3);
 		courses.add(course1);

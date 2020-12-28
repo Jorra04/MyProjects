@@ -50,7 +50,7 @@ public class School {
 		      for(Course tempCourse : this.courses) {
 		    	  text += "======================== Class Data =====================================\n";
 		    	  for(Student student : tempCourse.getStudents()) {
-		    		 text +=  "First Name: " + student.getName() + "\tGrade: " + tempCourse.studentGradeMap.get(student) +"\n";
+		    		 text +=  "First Name: " + student.getName() + "\tGrade: " + tempCourse.getGradeStudentMap().get(student) +"\n";
 		    	  }
 		    	  text += "========================= Student Data =====================================\n"
 		      		+ tempCourse.toString()

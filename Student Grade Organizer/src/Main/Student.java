@@ -1,18 +1,25 @@
 package Main;
 import java.util.*;
 public class Student {
-	private int GPA;
+	private double GPA;
 	private String name;
 	private String UID;
-	private List<Course> entrolledCourses; //can go through the list of courses and update gpa
+	private List<Course> enrolledCourses; //can go through the list of courses and update gpa
 	
 	public Student(int GPA, String name, String UID) {
+		this.enrolledCourses = new ArrayList();
 		this.GPA = GPA;
 		this.name = name;
 		this.UID = UID;
 	}
 	
-	public int getGPA() {
+	public double getGPA() {
+		double cumulativeGradePoints = 0;
+		for(Course course : enrolledCourses) {
+			cumulativeGradePoints += course.getGradeStudentMap().get(this);
+		}
+		
+		this.GPA = (cumulativeGradePoints * 1.0)/this.enrolledCourses.size();
 		return this.GPA;
 	}
 	
@@ -22,6 +29,10 @@ public class Student {
 	
 	public String getUID() {
 		return this.UID;
+	}
+	
+	public void addCourse(Course course) {
+		this.enrolledCourses.add(course);
 	}
 	
 	public void setGPA(int gpa) {

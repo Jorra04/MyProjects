@@ -3,7 +3,7 @@ package Main;
 import java.util.*;
 
 public class Course {
-	Map<Student, Integer> studentGradeMap;
+	private Map<Student, Integer> studentGradeMap;
 	private String courseName;
 	private String courseID;
 	private Professor professor;
@@ -46,6 +46,10 @@ public class Course {
 		return this.professor;
 	}
 	
+	public Map<Student, Integer> getGradeStudentMap(){
+		return this.studentGradeMap;
+	}
+	
 	public List<Student> getStudents(){
 		return this.students;
 	}
@@ -80,6 +84,7 @@ public class Course {
 	}
 	
 	public void addStudent(Student student, int grade) {
+		student.addCourse(this);
 		this.studentGradeMap.put(student, grade);
 		this.students.add(student);
 		this.classSize ++;
