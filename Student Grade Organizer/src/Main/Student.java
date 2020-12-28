@@ -1,9 +1,10 @@
 package Main;
-
+import java.util.*;
 public class Student {
 	private int GPA;
 	private String name;
 	private String UID;
+	private List<Course> entrolledCourses; //can go through the list of courses and update gpa
 	
 	public Student(int GPA, String name, String UID) {
 		this.GPA = GPA;
@@ -32,7 +33,7 @@ public class Student {
 	}
 	
 	public String toString() {
-		return "Name: " + this.name + ":\nUID: "+ this.UID  + "\nGrade: " + this.GPA + "\n";
+		return "Name: " + this.name + "\nUID: "+ this.UID  + "\nGrade: " + this.GPA + "\n";
 	}
 	
 	

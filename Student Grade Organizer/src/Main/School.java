@@ -43,18 +43,24 @@ public class School {
 			
 		      FileWriter myWriter = new FileWriter(Credentials.path);
 		      String text = "";
+		      
+		     
+		      
+		      
 		      for(Course tempCourse : this.courses) {
-		    	  text += "\n======================== Class Data ===========================\n" 
-			    		  
-		    		 + "========================= Student Data ==============================\n"
+		    	  text += "======================== Class Data =====================================\n";
+		    	  for(Student student : tempCourse.getStudents()) {
+		    		 text +=  "First Name: " + student.getName() + "\tGrade: " + tempCourse.studentGradeMap.get(student) +"\n";
+		    	  }
+		    	  text += "========================= Student Data =====================================\n"
 		      		+ tempCourse.toString()
 		    		  +"\n========================= Top Student in Class ==============================\n"
 		      		+ tempCourse.getTopStudent().toString() 
-		      		+ "\n======================== Top 5 students ================================\n"
+		      		+ "\n======================== Top 5 students ======================================\n"
 		      		+tempCourse.getTopKStudents(5)
-		      		+"\n======================== Weakest Student in Class ===========================\n"
+		      		+"\n======================== Weakest Student in Class =============================\n"
 		      		+tempCourse.getWeakestStudent()
-		      		+"\n======================== Next Class ===========================\n";
+		      		+"\n======================== Next Class ===========================================\n\n";
 		      }
 		      myWriter.write(text);
 		      myWriter.close();

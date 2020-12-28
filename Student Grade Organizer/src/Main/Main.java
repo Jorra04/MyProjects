@@ -11,8 +11,10 @@ public class Main {
 		
 		List<Course> courses = new ArrayList();
 		
-		Professor professor1 = new Professor(Credentials.fname, Credentials.lname, Credentials.age, Credentials.faculty );
-		Course course1 = new Course(Credentials.courseName,Credentials.courseCode ,professor1);
+		Professor professor1 = new Professor(Credentials.fname1, Credentials.lname1, Credentials.age1, Credentials.faculty1 );
+		Professor professor2 = new Professor(Credentials.fname2, Credentials.lname2, Credentials.age2, Credentials.faculty2 );
+		Course course1 = new Course(Credentials.courseName1,Credentials.courseCode1 ,professor1);
+		Course course2 = new Course(Credentials.courseName2,Credentials.courseCode2 ,professor2);
 		
 		Student s1 = new Student(Credentials.studentGPA1 ,Credentials.studentName1,Credentials.studentID1 );
 		Student s2 = new Student(Credentials.studentGPA2 ,Credentials.studentName2,Credentials.studentID2 );
@@ -21,13 +23,18 @@ public class Main {
 		Student s5 = new Student(Credentials.studentGPA5 ,Credentials.studentName5,Credentials.studentID5 );
 		
 		
-		course1.addStudent(s1);
-		course1.addStudent(s2);
-		course1.addStudent(s3);
-		course1.addStudent(s4);
-		course1.addStudent(s5);
+		course1.addStudent(s1, Credentials.studentGPA1);
+		course1.addStudent(s2 , Credentials.studentGPA2);
+		course1.addStudent(s3 , Credentials.studentGPA3);
+		course1.addStudent(s4 , Credentials.studentGPA4);
+		course1.addStudent(s5 , Credentials.studentGPA5);
 		
+		
+		course2.addStudent(s1, Credentials.studentGPA1);
+		course2.addStudent(s2 , Credentials.studentGPA2);
+		course2.addStudent(s3 , Credentials.studentGPA3);
 		courses.add(course1);
+		courses.add(course2);
 		
 		School school = new School(courses);
 		school.saveData();

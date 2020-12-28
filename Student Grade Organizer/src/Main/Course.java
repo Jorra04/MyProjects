@@ -3,7 +3,7 @@ package Main;
 import java.util.*;
 
 public class Course {
-	
+	Map<Student, Integer> studentGradeMap;
 	private String courseName;
 	private String courseID;
 	private Professor professor;
@@ -14,6 +14,7 @@ public class Course {
 	
 	
 	public Course(String courseName, String courseID, Professor professor) {
+		this.studentGradeMap = new HashMap();
 		this.courseName = courseName;
 		this.courseID = courseID;
 		this.professor = professor;
@@ -58,10 +59,11 @@ public class Course {
 	}
 	
 	public List<Student> getTopKStudents(int k){
-		if(k > this.classSize || k < 1) {
-			throw new IllegalArgumentException("Please provide a valid range.");
-		}
 		List<Student> outputList = new ArrayList();
+		if(k > this.classSize || k < 1) {
+			return outputList;
+		}
+		
 		for(int i = 0; i < k; i ++) {
 			outputList.add(this.students.get(i));
 		}
@@ -77,7 +79,8 @@ public class Course {
 		return this.classSize;
 	}
 	
-	public void addStudent(Student student) {
+	public void addStudent(Student student, int grade) {
+		this.studentGradeMap.put(student, grade);
 		this.students.add(student);
 		this.classSize ++;
 		this.cumulativeGradePoints += student.getGPA();
@@ -87,6 +90,7 @@ public class Course {
 	}
 	
 	public String toString() {
-		return "Course Name: " + this.courseName +"\nCourse ID: " +  this.courseID + "\nProfessor: "+ this.professor;
+		return "Course Name: " + this.courseName +"\nCourse ID: " +  this.courseID + "\nProfessor: "+ this.professor
+				+ "\nPeople Enrolled: " + this.classSize + "\nClass Average: " + this.classAverage;
 	}
 }
