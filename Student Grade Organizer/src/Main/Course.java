@@ -96,6 +96,6 @@ public class Course {
 	
 	public String toString() {
 		return "Course Name: " + this.courseName +"\nCourse ID: " +  this.courseID + "\nProfessor: "+ this.professor
-				+ "\nPeople Enrolled: " + this.classSize + "\nClass Average: " + this.classAverage;
+				+ "People Enrolled: " + this.classSize + "\nClass Average: " + this.classAverage + "\n";
 	}
 }

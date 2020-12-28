@@ -38,6 +38,9 @@ public class Main {
 		
 		School school = new School(courses);
 		
+		System.out.println(school.getCourses());
+		System.out.println(school.getNumberOfCourses());
+		
 		school.saveData();
 		
 

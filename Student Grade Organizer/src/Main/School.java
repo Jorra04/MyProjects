@@ -20,6 +20,14 @@ public class School {
 		this.numberOfCourses = other.numberOfCourses;
 	}
 	
+	public List<Course> getCourses(){
+		return this.courses;
+	}
+	
+	public int getNumberOfCourses() {
+		return this.numberOfCourses;
+	}
+	
 	public void saveData() {
 		
 		File f = new File(Credentials.path);
