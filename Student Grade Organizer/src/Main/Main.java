@@ -1,4 +1,6 @@
 package Main;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -22,40 +24,43 @@ public class Main {
 		class1.addStudent(s4);
 		class1.addStudent(s5);
 		
-		System.out.println(class1.toString());
 		
-		System.out.println("===============================================================");
+		class1.saveData();
 		
-		System.out.println(class1.getTopStudent().toString());
+//		try {
+//		      FileWriter myWriter = new FileWriter("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+//		      String text = "========================= Student Data ==============================\n"
+//		      		+ class1.toString()
+//		    		  +"\n========================= Top Student in Class ==============================\n"
+//		      		+ class1.getTopStudent().toString() 
+//		      		+ "\n======================== Top K students ================================\n"
+//		      		+class1.getTopKStudents(3)
+//		      		+"\n======================== Weakest Student in Class ===========================\n"
+//		      		+class1.getWeakestStudent();
+//		      myWriter.write(text);
+//		      myWriter.close();
+//		      System.out.println("Successfully wrote to the file.");
+//		    } catch (IOException e) {
+//		      System.out.println("An error occurred.");
+//		      e.printStackTrace();
+//		    }
 		
-		
-		System.out.println("===============================================================");
-		
-		System.out.println(class1.getTopKStudents(3));
-		
-		
-//		students.add(s1);
-//		students.add(s2);
-//		students.add(s3);
-//		students.add(s4);
-//		students.add(s5);
-	
-		
-		
-//		PriorityQueue<Student> pleaseWork = new PriorityQueue<>(new StudentComparator());
+//		System.out.println(class1.toString());
 //		
-//		for(Student student : students) {
-//			pleaseWork.offer(student);
-//		}
+//		System.out.println("========================= Top Student in Class ==============================");
 //		
-//		while(!pleaseWork.isEmpty()) {
-//			outputStudents.add(pleaseWork.poll());
-//		}
+//		System.out.println(class1.getTopStudent().toString());
 //		
 //		
-//		System.out.println(students.toString());
-//
-//		System.out.println(outputStudents.toString());
+//		System.out.println("======================== Top K students ================================");
+//		
+//		System.out.println(class1.getTopKStudents(3));
+//		
+//		System.out.println("======================== Weakest Student in Class ===========================");
+//		
+//		System.out.println(class1.getWeakestStudent());
+		
+
 	}
 
 }

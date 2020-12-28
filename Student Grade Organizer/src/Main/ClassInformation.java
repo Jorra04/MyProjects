@@ -1,4 +1,7 @@
 package Main;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 public class ClassInformation {
 	
@@ -30,12 +33,16 @@ public class ClassInformation {
 		return this.students.get(0);
 	}
 	
+	public Student getWeakestStudent() {
+		return this.students.get(this.classSize -1);
+	}
+	
 	public List<Student> getTopKStudents(int k){
 		if(k > this.classSize || k < 1) {
 			throw new IllegalArgumentException("Please provide a valid range.");
 		}
 		List<Student> outputList = new ArrayList();
-		for(int i = 0; i <= k; i ++) {
+		for(int i = 0; i < k; i ++) {
 			outputList.add(this.students.get(i));
 		}
 		
@@ -57,6 +64,45 @@ public class ClassInformation {
 		this.classAverage = this.cumulativeGradePoints / (1.0 *this.classSize);
 		
 		Collections.sort(this.students, new StudentComparator());
+	}
+	
+	public void saveData() {
+		
+		File f = new File("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+		if(!f.exists() || f.isDirectory()) { 
+			try {
+			      File myObj = new File("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+			      if (myObj.createNewFile()) {
+			        System.out.println("File created: " + myObj.getName());
+			      } else {
+			        System.out.println("File already exists.");
+			      }
+			    } catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+		}
+		try {
+			
+			
+			
+			
+		      FileWriter myWriter = new FileWriter("C:\\Users\\jorra\\OneDrive\\Desktop\\student records.txt");
+		      String text = "========================= Student Data ==============================\n"
+		      		+ this.toString()
+		    		  +"\n========================= Top Student in Class ==============================\n"
+		      		+ this.getTopStudent().toString() 
+		      		+ "\n======================== Top 5 students ================================\n"
+		      		+this.getTopKStudents(5)
+		      		+"\n======================== Weakest Student in Class ===========================\n"
+		      		+this.getWeakestStudent();
+		      myWriter.write(text);
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
 	}
 
 	
