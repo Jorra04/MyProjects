@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.*;
 public class ClassInformation {
 	
+	private String subject;
 	private int cumulativeGradePoints;
 	private List<Student> students;
 	private double classAverage;
 	private int classSize;
 	
-	public ClassInformation() {
+	public ClassInformation(Course course, Professor professor) {
 		this.students  = new ArrayList();
 		this.classAverage = 0;
 		this.classSize = 0;
