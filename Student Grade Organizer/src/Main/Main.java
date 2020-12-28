@@ -23,20 +23,21 @@ public class Main {
 		Student s5 = new Student(Credentials.studentGPA5 ,Credentials.studentName5,Credentials.studentID5 );
 		
 		
-		course1.addStudent(s1, Credentials.studentGPA1);
-		course1.addStudent(s2 , Credentials.studentGPA2);
-		course1.addStudent(s3 , Credentials.studentGPA3);
-		course1.addStudent(s4 , Credentials.studentGPA4);
-		course1.addStudent(s5 , Credentials.studentGPA5);
+		course1.addStudent(s1, Credentials.course1GPA1);
+		course1.addStudent(s2 , Credentials.course1GPA2);
+		course1.addStudent(s3 , Credentials.course1GPA3);
+		course1.addStudent(s4 , Credentials.course1GPA5);
+		course1.addStudent(s5 , Credentials.course1GPA5);
 		
 		
 		course2.addStudent(s1, Credentials.studentGPA1);
-		course2.addStudent(s2 , Credentials.studentGPA2);
-		course2.addStudent(s3 , Credentials.studentGPA3);
+		course2.addStudent(s2 , Credentials.course2GPA2);
+		course2.addStudent(s3 , Credentials.course2GPA3);
 		courses.add(course1);
 		courses.add(course2);
 		
 		School school = new School(courses);
+		
 		school.saveData();
 		
 
