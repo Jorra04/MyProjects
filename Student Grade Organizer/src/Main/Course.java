@@ -83,7 +83,7 @@ public class Course {
 		this.studentGradeMap.put(student, grade);
 		this.students.add(student);
 		this.classSize ++;
-		this.cumulativeGradePoints += student.getGPA();
+		this.cumulativeGradePoints += this.studentGradeMap.get(student);
 		this.classAverage = this.cumulativeGradePoints / (1.0 *this.classSize);
 		
 		Collections.sort(this.students, new StudentComparator());
