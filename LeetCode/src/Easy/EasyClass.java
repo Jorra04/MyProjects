@@ -815,7 +815,7 @@ public class EasyClass {
 		return result.reverse().toString();
 	}
 
-	public static String longestPalindrome(String s) {
+	protected static String longestPalindrome(String s) {
 		String sub;
 		int max_val = 0;
 		String max_pal = "";
@@ -1236,6 +1236,26 @@ public class EasyClass {
 		}
 		
 		return outputList;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 //	public static List<Integer> findClosestElements(int[] arr, int k, int x) {
