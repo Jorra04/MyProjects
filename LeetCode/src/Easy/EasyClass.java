@@ -207,19 +207,22 @@ public class EasyClass {
 //		int x = 7;
 //		System.out.println(findClosestElements(arr, k, x));
 
+//		
+//		List<Integer> inputList = new ArrayList();
+//		inputList.add(2);
+//		inputList.add(7);
+//		inputList.add(3);
+//		
+//		inputList.add(8);
+//		inputList.add(6);
+//		inputList.add(0);
+//		inputList.add(1);
+//		
+//		System.out.println(minHeapSort(inputList));
+//		System.out.println(maxHeapSort(inputList));
 		
-		List<Integer> inputList = new ArrayList();
-		inputList.add(2);
-		inputList.add(7);
-		inputList.add(3);
-		
-		inputList.add(8);
-		inputList.add(6);
-		inputList.add(0);
-		inputList.add(1);
-		
-		System.out.println(minHeapSort(inputList));
-		System.out.println(maxHeapSort(inputList));
+		int[] gain = {-4,-3,-2,-1,4,3,2};
+		System.out.println(largestAltitude(gain));
 		
 	}
 
@@ -1321,4 +1324,28 @@ public class EasyClass {
 //	        }
 //	    }
 //	}
+	
+	
+	public static int largestAltitude(int[] gain) {
+        if(gain.length == 1){
+            return Math.max(0, gain[0]);
+        }
+        int index = 1;
+        int runningSum = 0;
+        int[] altitudes = new int[gain.length + 1];
+        for(int i = 0; i < gain.length; i ++){
+        	runningSum += gain[i];
+            altitudes[index++] += runningSum;
+            
+        }
+        
+        int largestAltitudeFound = altitudes[0];
+        
+        for(int altitude : altitudes){
+           
+            largestAltitudeFound = Math.max(largestAltitudeFound, altitude);
+        }
+        
+        return largestAltitudeFound;
+    }
 }
